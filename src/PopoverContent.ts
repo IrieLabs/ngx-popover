@@ -66,6 +66,9 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
 
     @Input()
     closeOnMouseOutside: boolean = false;
+	
+	@Input()
+	appendToBody: boolean = false;
 
     // -------------------------------------------------------------------------
     // Properties
@@ -161,11 +164,11 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // Protected Methods
     // -------------------------------------------------------------------------
 
-    protected positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
+    protected positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string): { top: number, left: number } {
         let positionStrParts = positionStr.split("-");
         let pos0 = positionStrParts[0];
         let pos1 = positionStrParts[1] || "center";
-        let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+        let hostElPos = this.appendToBody ? this.offset(hostEl) : this.position(hostEl);
         let targetElWidth = targetEl.offsetWidth;
         let targetElHeight = targetEl.offsetHeight;
 
